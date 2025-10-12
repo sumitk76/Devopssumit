@@ -20,7 +20,8 @@ pipeline {
                         ls -l /tmp
                     echo "--- Listing all pods in the $NAMESPACE namespace ---"
                     alias kubectl="minikube kubectl --"
-                    kubectl get pods
+                    kubectl get pods -o wide
+		    kubectl get services -o wide
                     minikube service nginx-service --url
                     curl http://192.168.49.2:32671
                     sleep 2
