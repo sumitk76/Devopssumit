@@ -23,8 +23,9 @@ pipeline {
                     kubectl get pods
                     minikube service nginx-service --url
                     curl http://192.168.49.2:32671
-
-                
+                    sleep 2
+		    echo "Samisa:)";
+                  
                     '''
 
                     // Execute the script on the remote server
