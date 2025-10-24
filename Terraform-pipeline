@@ -1,4 +1,10 @@
-#!/bin/bash
+pipeline {
+    agent any
+
+    stages {
+        stage('Login to remote server Sumit') {
+            steps {
+               sh '''#!/bin/bash
 
 # Define credentials
 USER="sumit"
@@ -7,17 +13,24 @@ PASSWORD="Rchik@6824"
 PORT=22  # Optional
 
 # Run SSH with password
-sshpass -p "$PASSWORD" ssh -p $PORT $USER@$HOST
+sshpass -p "$PASSWORD" ssh -p $PORT $USER@$HOST'''
+            }
+        }
 
-#!/bin/bash
-
+        stage('Checking directory to run terraform') {
+            steps {
+                sh '''
 # Set your Terraform project directory
 TF_DIR="/home/sumit/learn-terraform-get-started-aws"
 
 # Move to the Terraform directory
-cd "$TF_DIR" || { echo "Directory not found: $TF_DIR"; exit 1; }
+cd "$TF_DIR" || { echo "Directory not found: $TF_DIR"; exit 1; }'''
+            }
+        }
 
-# Initialize Terraform
+        stage('Terraform- Ec2) {
+            steps {
+               sh '''# Initialize Terraform
 terraform init
 
 # Validate configuration
@@ -31,4 +44,8 @@ terraform validate
 terraform apply
 
 # Optional: Uncomment to destroy infrastructure
-# terraform destroy -auto-approve
+# terraform destroy -auto-approve'''
+            }
+        }
+    }
+}
