@@ -4,47 +4,47 @@ pipeline {
     stages {
         stage('Login to remote server Sumit') {
             steps {
-               sh '''#!/bin/bash
+                sh '' '#!/bin/bash
 
-# Define credentials
-USER="sumit"
-HOST="172.21.219.211"
-PASSWORD="Rchik@6824"
-PORT=22  # Optional
+                # Define credentials
+                USER="sumit"
+                HOST="172.21.219.211"
+                PASSWORD="Rchik@6824"
+                PORT=22  # Optional
 
-# Run SSH with password
-sshpass -p "$PASSWORD" ssh -p $PORT $USER@$HOST'''
+                # Run SSH with password
+                sshpass -p "$PASSWORD" ssh -p $PORT $USER@$HOST' ''
             }
         }
 
-        stage('Checking directory to run terraform') {
+        stage('Checking directory to run terraform23') {
             steps {
-                sh '''
-# Set your Terraform project directory
-TF_DIR="/home/sumit/learn-terraform-get-started-aws"
+                sh '' '
+                # Set your Terraform project directory
+                TF_DIR="/home/sumit/learn-terraform-get-started-aws"
 
-# Move to the Terraform directory
-cd "$TF_DIR" '''
+                # Move to the Terraform directory
+                cd "$TF_DIR" ' ''
             }
         }
 
-        stage('Terraform- Ec2') {
+        stage('Terraform-Ec23') {
             steps {
-               sh '''# Initialize Terraform
-terraform init
+                sh '' '# Initialize Terraform
+                terraform init
 
-# Validate configuration
-terraform validate
+                # Validate configuration
+                terraform validate
 
-# Create an execution plan
-#terraform plan -out=tfplan
+                # Create an execution plan
+                #terraform plan -out=tfplan
 
-# Apply the plan
-#terraform apply tfplan
-terraform apply
+                # Apply the plan
+                #terraform apply tfplan
+                terraform apply
 
-# Optional: Uncomment to destroy infrastructure
-# terraform destroy -auto-approve'''
+                # Optional: Uncomment to destroy infrastructure
+                # terraform destroy -auto-approve' ''
             }
         }
     }
