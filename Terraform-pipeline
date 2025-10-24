@@ -18,55 +18,6 @@ pipeline {
                 '''
             }
         }
-    
-
-
-   
-        stage('Navigate to Terraform Directory1') {
-            steps {
-                sh '''
-                    #!/bin/bash
-					cd "$TF_DIR" || { echo "Directory not found: $TF_DIR"; exit 1; }
-                    echo "Now in directory: $(pwd)"
-                '''
-            }
-        }
-    
-
-        stage('Terraform Init1') {
-            steps {
-                dir("${TF_DIR}") {
-                    sh 'terraform init'
-                }
-            }
-        }
-
-        stage('Terraform Validate1') {
-            steps {
-                dir("${TF_DIR}") {
-                    sh 'terraform validate'
-                }
-            }
-        }
-
-        stage('Terraform Apply1') {
-            steps {
-                dir("${TF_DIR}") {
-                    sh 'terraform apply -auto-approve'
-                }
-            }
-        }
-
-        // Optional: Uncomment to destroy infrastructure
-        /*
-        stage('Terraform Destroy1') {
-            steps {
-                dir("${TF_DIR}") {
-                    sh 'terraform destroy -auto-approve'
-                }
-            }
-        }
-        */
-    
+     
     }
 }
