@@ -1,51 +1,73 @@
 pipeline {
     agent any
 
+    environment {
+        USER = "sumit"
+        HOST = "172.21.219.211"
+        PASSWORD = "Rchik@6824"
+        PORT = "22"
+		TF_DIR = "/home/sumit/learn-terraform-get-started-aws"
+    }
+
     stages {
-        stage('Login to remote server Sumit') {
+        stage('SSH to Remote Server') {
             steps {
-                sh '' '#!/bin/bash
-
-                # Define credentials
-                USER="sumit"
-                HOST="172.21.219.211"
-                PASSWORD="Rchik@6824"
-                PORT=22  # Optional
-
-                # Run SSH with password
-                sshpass -p "$PASSWORD" ssh -p $PORT $USER@$HOST' ''
-            }
-        }
-
-        stage('Checking directory to run terraform23') {
-            steps {
-                sh '' '
-                # Set your Terraform project directory
-                TF_DIR="/home/sumit/learn-terraform-get-started-aws"
-
-                # Move to the Terraform directory
-                cd "$TF_DIR" ' ''
-            }
-        }
-
-        stage('Terraform-Ec23') {
-            steps {
-                sh '' '# Initialize Terraform
-                terraform init
-
-                # Validate configuration
-                terraform validate
-
-                # Create an execution plan
-                #terraform plan -out=tfplan
-
-                # Apply the plan
-                #terraform apply tfplan
-                terraform apply
-
-                # Optional: Uncomment to destroy infrastructure
-                # terraform destroy -auto-approve' ''
+                sh '''
+                    #!/bin/bash
+                    sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no -p $PORT $USER@$HOST "echo 'Connected successfully'; uptime"
+                '''
             }
         }
     }
+
+
+    stages {
+        stage('Navigate to Terraform Directory') {
+            steps {
+                sh '''
+                    #!/bin/bash
+					cd "$TF_DIR" || { echo "Directory not found: $TF_DIR"; exit 1; }
+                    echo "Now in directory: $(pwd)"
+                '''
+            }
+        }
+    }
+
+stages {
+        stage('Terraform Init') {
+            steps {
+                dir("${TF_DIR}") {
+                    sh 'terraform init'
+                }
+            }
+        }
+
+        stage('Terraform Validate') {
+            steps {
+                dir("${TF_DIR}") {
+                    sh 'terraform validate'
+                }
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                dir("${TF_DIR}") {
+                    sh 'terraform apply -auto-approve'
+                }
+            }
+        }
+
+        // Optional: Uncomment to destroy infrastructure
+        /*
+        stage('Terraform Destroy') {
+            steps {
+                dir("${TF_DIR}") {
+                    sh 'terraform destroy -auto-approve'
+                }
+            }
+        }
+        */
+    }
+
 }
