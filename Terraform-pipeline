@@ -28,7 +28,7 @@ cd "$TF_DIR" || { echo "Directory not found: $TF_DIR"; exit 1; }'''
             }
         }
 
-        stage('Terraform- Ec2) {
+        stage('Terraform- Ec2') {
             steps {
                sh '''# Initialize Terraform
 terraform init
