@@ -24,7 +24,7 @@ sshpass -p "$PASSWORD" ssh -p $PORT $USER@$HOST'''
 TF_DIR="/home/sumit/learn-terraform-get-started-aws"
 
 # Move to the Terraform directory
-cd "$TF_DIR" || { echo "Directory not found: $TF_DIR"; exit 1; }'''
+cd "$TF_DIR" '''
             }
         }
 
