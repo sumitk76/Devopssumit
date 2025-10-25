@@ -22,7 +22,7 @@ pipeline {
                     cd /home/sumit/learn-terraform-get-started-aws   
                     echo "<<<<<....Wait for terrform to start....>>>>>>>>>"
                     sleep 5
-					terraform init
+					#terraform init
 					terraform plan
 					sleep 5
 					terraform apply
