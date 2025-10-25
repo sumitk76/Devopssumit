@@ -20,6 +20,7 @@ pipeline {
                        
                     echo "<<<<<....Wait for terrform to start....>>>>>>>>>"
                     sleep 5
+					terraform init
 					terraform plan
 					sleep 5
 					terraform apply
