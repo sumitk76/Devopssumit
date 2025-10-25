@@ -17,7 +17,9 @@ pipeline {
                     #!/bin/bash
                         echo "Hello from the remote server!"
                         hostname
-                       
+					echo "=============================================="
+					echo "going to terraform directorty";
+                    cd /home/sumit/learn-terraform-get-started-aws   
                     echo "<<<<<....Wait for terrform to start....>>>>>>>>>"
                     sleep 5
 					terraform init
