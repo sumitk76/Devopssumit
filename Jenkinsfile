@@ -20,12 +20,12 @@ pipeline {
                        
                     echo "<<<<<....Wait for terrform to start....>>>>>>>>>"
                     sleep 5
-					terrform plan
+					terraform plan
 					sleep 5
-					terrform apply
+					terraform apply
 					sleep 30
 					echo "Find below terrform result";
-                    eco "END";
+                    echo "END";
                     '''
 
                     // Execute the script on the remote server
