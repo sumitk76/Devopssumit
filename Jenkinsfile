@@ -19,7 +19,14 @@ pipeline {
                         hostname
 					echo "=============================================="
 					echo "going to terraform directorty";
-                    cd /home/sumit/learn-terraform-get-started-aws   
+					TARGET_DIR="/home/sumit/learn-terraform-get-started-aws"
+                    cd "$TARGET_DIR" || {
+                      echo "Failed to change directory to $TARGET_DIR"
+                      exit 1
+                        }
+ 
+                    echo "Now in directory: $(pwd)"
+					
                     echo "<<<<<....Wait for terrform to start....>>>>>>>>>"
                     sleep 5
 					#terraform init
