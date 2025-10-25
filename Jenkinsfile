@@ -17,16 +17,15 @@ pipeline {
                     #!/bin/bash
                         echo "Hello from the remote server!"
                         hostname
-                        ls -l /tmp
-                    echo "--- Listing all pods in the $NAMESPACE namespace ---"
-                    alias kubectl="minikube kubectl --"
-                    kubectl get pods -o wide
-		    kubectl get services -o wide
-                    minikube service nginx-service --url
-                    curl http://192.168.49.2:32671
-                    sleep 2
-		    echo "Samisa:)";
-                  
+                       
+                    echo "<<<<<....Wait for terrform to start....>>>>>>>>>"
+                    sleep 5
+					terrform plan
+					sleep 5
+					terrform apply
+					sleep 30
+					echo "Find below terrform result";
+                    eco "END";
                     '''
 
                     // Execute the script on the remote server
